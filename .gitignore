@@ -13,3 +13,6 @@ Frontend/.env
 # Editor
 .vscode/
 .DS_Store
+
+#Env
+.env
