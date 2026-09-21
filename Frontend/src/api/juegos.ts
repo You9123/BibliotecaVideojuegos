@@ -7,3 +7,8 @@ export async function buscarJuegos(query: string): Promise<ResultadoJuego[]> {
   });
   return data;
 }
+
+export async function agregarABiblioteca(juego: ResultadoJuego) {
+  const { data } = await apiClient.post("/juegos/agregar/", juego);
+  return data;
+}
