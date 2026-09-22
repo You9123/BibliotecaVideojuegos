@@ -46,3 +46,13 @@ def agregar_a_biblioteca(request):
         return Response({"mensaje": "Este juego ya esta en la biblioteca"}, status=200)
     
     return Response(JuegoUsuarioSerializer(entrada).data, status=201)
+
+@api_view(["GET"])
+@permission_classes([AllowAny])  # TEMPORAL: hasta que agreguemos login real
+def ver_biblioteca(request):
+    usuario = User.objects.first()  # TEMPORAL: mientras no hay login
+    if usuario is None:
+        return Response([])
+
+    entradas = JuegoUsuario.objects.filter(usuario=usuario).select_related("juego")
+    return Response(JuegoUsuarioSerializer(entradas, many=True).data)
